@@ -1,8 +1,12 @@
 import   React  from 'react';
-import {Text,View} from 'react-native';
+import {StatusBar} from 'react-native';
 import Screen from './srceen';
 export default App =()=>{
   return (
-    <Screen/>
+    <React.Fragment>
+      <StatusBar barStyle="default" />
+       <Screen/>
+    </React.Fragment>
+   
   )
 }
