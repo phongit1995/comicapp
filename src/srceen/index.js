@@ -27,7 +27,7 @@ const Screen=()=>{
 }
 const BottomTab = ()=>{
     return (
-        <TabBottom.Navigator tabBarOptions={{style:{paddingBottom:5,borderRadius:10}}} initialRouteName={SCREEN.HOME_SCREEN} >
+        <TabBottom.Navigator tabBarOptions={{style:{paddingBottom:5}}} initialRouteName={SCREEN.HOME_SCREEN} >
             <TabBottom.Screen 
                 name={SCREEN.HOME_SCREEN} 
                 component={Home}
