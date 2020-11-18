@@ -4,9 +4,6 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import ComicHot from './ComicHot/ComicHot';
 import ComicUpdate from './ComicUpdate/ComicUpdate';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchListComic } from '../../api/ListComic'
-import { unwrapResult } from '@reduxjs/toolkit';
 const Home = () => {
     return (
         <View style={styles.container}>
