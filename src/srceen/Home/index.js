@@ -13,7 +13,6 @@ const Home = () => {
                 <ComicUpdate />
             </ScrollView>
         </View>
-
     )
 }
 

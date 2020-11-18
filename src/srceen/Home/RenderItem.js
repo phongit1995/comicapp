@@ -2,7 +2,9 @@ import React from 'react';
 import { Text, View, StatusBar, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import Feather from 'react-native-vector-icons/Feather';
+import {formatViews} from '../../common/stringHelper';
 const { width, height } = Dimensions.get('window');
+
 const RenderItem = ({ item }) => {
 
     return (
@@ -14,7 +16,7 @@ const RenderItem = ({ item }) => {
                 <Text numberOfLines={2} style={styles.nameComic}>{item.name}</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 5 }}>
                     <Feather name="eye" size={10} style={{ marginRight: 5 }}></Feather>
-                    <Text style={styles.nameChap}>{item.views}</Text>
+                    <Text style={styles.nameChap}> {formatViews(item.views)}</Text>
                 </View>
             </View>
         </RectButton>
@@ -42,6 +44,6 @@ const styles = StyleSheet.create({
     },
     nameChap: {
         textAlign: "center",
-        fontSize: 11
+        fontSize: 10
     }
 })
