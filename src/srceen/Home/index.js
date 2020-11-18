@@ -8,32 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchListComic } from '../../api/ListComic'
 import { unwrapResult } from '@reduxjs/toolkit';
 const Home = () => {
-    const dispatch = useDispatch();
-    const [DATA, setData] = React.useState([])
-    const [loading, setLoading] = React.useState(false)
-    const listComic = useSelector(state => state.playListComic);
-    const params = {
-        "page": 1,
-        "numberItem": 10,
-        "type": 1
-    }
-    React.useEffect(() => {
-        const fetchDAta = (async () => {
-            const list = await dispatch(fetchListComic(params));
-            const datalist = unwrapResult(list);
-            if (datalist?.status === "success") {
-                setLoading(() => listComic.loading)
-                setData(() => datalist?.data)
-            }
-        })
-        fetchDAta();
-        return () => fetchDAta();
-    }, [])
     return (
         <View style={styles.container}>
             <HomeHeader />
             <ScrollView style={{ paddingHorizontal: 10, flex: 1 }}>
-                <ComicHot ></ComicHot>
+                <ComicHot />
                 <ComicUpdate />
             </ScrollView>
         </View>
