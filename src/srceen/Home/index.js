@@ -1,9 +1,8 @@
 import React from 'react';
 import { Text, View, SafeAreaView, StyleSheet, ScrollView, FlatList } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
-import ComicRecommend from './ComicRecommend/ComicRecommend';
+import ComicHot from './ComicHot/ComicHot';
 import ComicUpdate from './ComicUpdate/ComicUpdate';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchListComic } from '../../api/ListComic'
@@ -34,24 +33,8 @@ const Home = () => {
         <View style={styles.container}>
             <HomeHeader />
             <ScrollView style={{ paddingHorizontal: 10, flex: 1 }}>
-                <View>
-                    <View >
-                        <Text style={{ paddingVertical: 10, fontWeight: 'bold', fontSize: 15 }}>TRUYỆN ĐỀ CỬ</Text>
-                        <ComicRecommend DATA={DATA} loading={loading}></ComicRecommend>
-                    </View>
-                </View>
-                <View>
-                    <View>
-                        <View style={styles.titlComicUpdae}>
-                            <Text style={{ fontWeight: 'bold', fontSize: 15 }}>TRUYỆN MỚI CẬP NHẬT</Text>
-                            <View style={styles.comicSeeMore}>
-                                <Text style={styles.comicnameSee}>Xem Thêm</Text>
-                                <Feather name="chevron-down" size={20} style={{ marginLeft: 5 }}></Feather>
-                            </View>
-                        </View>
-                        <ComicUpdate DATA={DATA} loading={loading}></ComicUpdate>
-                    </View>
-                </View>
+                <ComicHot ></ComicHot>
+                <ComicUpdate />
             </ScrollView>
         </View>
 
