@@ -40,7 +40,16 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         paddingHorizontal: 10,
-        borderBottomWidth: 0.5
+        borderBottomWidth: 0.5,
+        borderBottomColor:"#A6ACA3",
+        shadowColor: 'black',
+        shadowOpacity: 0.26,
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowRadius: 10,
+        elevation:1
     },
     titlComicUpdae: {
         flexDirection: 'row',

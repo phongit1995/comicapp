@@ -1,12 +1,14 @@
 import React ,{useState,useEffect} from 'react';
-import { Text, View, StatusBar, Image, StyleSheet, FlatList, Dimensions, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet, Dimensions, ActivityIndicator ,TouchableOpacity} from 'react-native';
 import RenderItem from '../RenderItem';
 import {getListCommicNew} from './../../../api/comic';
-import Feather from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
+import * as SCREEN from './../../../constants/screen';
 const { width } = Dimensions.get('window');
 const ComicUpdate = () => {
     const [loading,setLoading]= useState(true);
     const [listComic,setListComic] = useState([]);
+    const navigation = useNavigation();
     useEffect(()=>{
         getListCommicNew(1,12).then(result=>{
             if(result.status==201||result.data?.code==200){
@@ -16,14 +18,10 @@ const ComicUpdate = () => {
         })
     },[])
     return (
-        <View>
+        <View style={{marginBottom:10}}>
             <View>
                 <View style={styles.titlComicUpdae}>
                     <Text style={{ fontWeight: 'bold', fontSize: 15 }}>TRUYỆN MỚI CẬP NHẬT</Text>
-                    <View style={styles.comicSeeMore}>
-                        <Text style={styles.comicnameSee}>Xem Thêm</Text>
-                        <Feather name="chevron-down" size={20} style={{ marginLeft: 5 }}></Feather>
-                    </View>
                 </View>
                 <View style={styles.contaiItem}>
                     {
@@ -36,6 +34,9 @@ const ComicUpdate = () => {
                         ) 
                     }
                 </View>
+                <TouchableOpacity style={styles.btnViewsAll} onPress={()=>navigation.navigate(SCREEN.PAGE_COMIC_SCREEN,{type:1})}>
+                    <Text style={{color:"#FFFFFF"}}>Xem Tất Cả Truyện Mới</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -63,7 +64,11 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    comicnameSee: {
-
+    btnViewsAll:{
+        alignItems:"center",
+        padding:3,
+        backgroundColor:"#F2BE33",
+        marginTop:5,
+        borderRadius:3
     }
 })

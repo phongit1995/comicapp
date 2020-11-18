@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator ,TransitionPresets } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconEvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -13,6 +13,8 @@ import Category from './Category';
 import Follow from './Follow';
 import Info from './Info';
 import Login from './Login'
+import DetialComic from './DetialComic';
+import PageComic from './PageComic';
 const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Screen=()=>{
@@ -21,6 +23,12 @@ const Screen=()=>{
              <Stack.Navigator screenOptions={{headerShown:false}}>
                 <Stack.Screen name={SCREEN.MAIN_SCREEN} component={BottomTab} />
                 <Stack.Screen name={SCREEN.LOGIN_SCREEN} component={Login} />
+                <Stack.Screen name={SCREEN.DETIAL_COMIC_SCREEN} component={DetialComic} options={{...TransitionPresets.SlideFromRightIOS}}/>
+                <Stack.Screen name={SCREEN.PAGE_COMIC_SCREEN} component={PageComic} 
+                    options={({route})=>({
+                        title:route.params.type==1?"Truyện Mới Nhất":"Truyện Hot Nhất",
+                        headerShown:true,...TransitionPresets.SlideFromRightIOS
+                    })}/>
              </Stack.Navigator>
         </NavigationContainer>
     )

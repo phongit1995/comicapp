@@ -1,14 +1,18 @@
 import React from 'react';
 import { Text, View, StatusBar, Image, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
 import Feather from 'react-native-vector-icons/Feather';
 import {formatViews} from '../../common/stringHelper';
-const { width, height } = Dimensions.get('window');
-
+import { useNavigation } from '@react-navigation/native';
+import * as SCREEN from './../../constants/screen';
+const { width } = Dimensions.get('window');
 const RenderItem = ({ item }) => {
-
+    const navigation = useNavigation();
+    const goToDetialComic=(id)=>{
+        console.log(id);
+        navigation.navigate(SCREEN.DETIAL_COMIC_SCREEN,{id:id})
+    }
     return (
-        <RectButton style={styles.contaiItem}>
+        <TouchableOpacity style={styles.contaiItem} onPress={()=>goToDetialComic(item._id)} >
             <View style={{ justifyContent: 'center', height: '70%', marginBottom: 10 }}>
                 <Image source={{ uri: item.image }} style={styles.imageRecommend}></Image>
             </View>
@@ -19,7 +23,7 @@ const RenderItem = ({ item }) => {
                     <Text style={styles.nameChap}> {formatViews(item.views)}</Text>
                 </View>
             </View>
-        </RectButton>
+        </TouchableOpacity>
     )
 }
 export default React.memo(RenderItem)
