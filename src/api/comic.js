@@ -13,3 +13,10 @@ export const getListCommicNew =(page=1,numberItem=10)=>{
         type: 1
     })
 }
+export const getListComicByType=(page=1,numberItem=0,type=0)=>{
+    return axios.post('/manga/get-list',{
+        page: page,
+        numberItem: numberItem,
+        type: type
+    })
+}

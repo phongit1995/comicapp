@@ -5,7 +5,7 @@ import {formatViews} from '../../common/stringHelper';
 import { useNavigation } from '@react-navigation/native';
 import * as SCREEN from './../../constants/screen';
 const { width } = Dimensions.get('window');
-const RenderItem = ({ item }) => {
+const ItemComic = ({ item }) => {
     const navigation = useNavigation();
     const goToDetialComic=(id)=>{
         navigation.navigate(SCREEN.DETIAL_COMIC_SCREEN,{id:id})
@@ -25,13 +25,13 @@ const RenderItem = ({ item }) => {
         </TouchableOpacity>
     )
 }
-export default React.memo(RenderItem)
+export default React.memo(ItemComic)
 const styles = StyleSheet.create({
     contaiItem: {
-        width: (width / 3) - 10,
+        width: (width/3),
         height: (width * 0.5),
         marginBottom: 5,
-        paddingVertical: 10,
+        paddingVertical: 2,
     },
     imageRecommend: {
         resizeMode: 'contain',
