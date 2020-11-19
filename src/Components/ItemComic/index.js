@@ -28,13 +28,14 @@ const ItemComic = ({ item }) => {
 export default React.memo(ItemComic)
 const styles = StyleSheet.create({
     contaiItem: {
-        width: (width/3),
-        height: (width * 0.5),
+        width: (width /3) - 5,
+        height: (width * 0.6),
         marginBottom: 5,
         paddingVertical: 2,
+        paddingHorizontal:5
     },
     imageRecommend: {
-        resizeMode: 'contain',
+        resizeMode: "stretch",
         width: "100%",
         height: "100%",
         borderRadius: 5,

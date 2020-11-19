@@ -28,13 +28,14 @@ const RenderItem = ({ item }) => {
 export default React.memo(RenderItem)
 const styles = StyleSheet.create({
     contaiItem: {
-        width: (width / 3) - 10,
-        height: (width * 0.5),
+        width: (width /3) - 7,
+        height: (width * 0.6),
         marginBottom: 5,
         paddingVertical: 10,
+        paddingHorizontal:5
     },
     imageRecommend: {
-        resizeMode: 'contain',
+        resizeMode: "stretch",
         width: "100%",
         height: "100%",
         borderRadius: 5,

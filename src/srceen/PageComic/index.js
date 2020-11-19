@@ -2,7 +2,6 @@ import React ,{useEffect,useState} from 'react';
 import { useRoute  } from '@react-navigation/native';
 import { SafeAreaView , View, FlatList, StyleSheet } from 'react-native';
 import ItemComic from './../../Components/ItemComic';
-import { v4 as uuidv4 } from 'uuid';
 import {getListComicByType} from './../../api/comic';
 const NUMBER_ITEM_PAGE=12;
 const PageComic =()=>{
@@ -37,6 +36,7 @@ const PageComic =()=>{
                     onEndReached={onLoadMore}
                     onRefresh={onFreshList}
                     refreshing={false}
+                    contentContainerStyle={{justifyContent: "space-between",alignItems:"center"}}
                 />
             </View>
         </SafeAreaView>
