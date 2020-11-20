@@ -18,6 +18,9 @@ const DetialComic =()=>{
     return(
         <View style={styles.container}>
             <Header/>
+            <View>
+                <Text>CÔ VỢ MANG THAI MỘT TẶNG MỘT</Text>
+            </View>
         </View>
     )
 }
