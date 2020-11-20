@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     },
     btnViewsAll:{
         alignItems:"center",
-        padding:3,
+        padding:5,
         backgroundColor:"#F2BE33",
         marginTop:5,
         borderRadius:3
