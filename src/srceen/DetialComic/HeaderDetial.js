@@ -25,7 +25,6 @@ const Header = ()=>{
 export default Header ;
 const styles= StyleSheet.create({
     headerContainer:{
-        height:20,
         paddingHorizontal:15,
         paddingVertical:10,
         justifyContent:"space-between",
