@@ -57,7 +57,7 @@ const PageComic =()=>{
                 <FlatList
                     numColumns={3}
                     data={listComic}
-                    keyExtractor={(item, index) =>item._id}
+                    keyExtractor={(item, index) =>item._id+index}
                     renderItem={({item})=><ItemComic item={item}/>}
                     onEndReachedThreshold={1}
                     onEndReached={onLoadMore}
