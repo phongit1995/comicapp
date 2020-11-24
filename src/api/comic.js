@@ -25,3 +25,11 @@ export const getDetialComic=(id)=>{
         manga_id:id
     })
 }
+export const getListByCategorySortViews=(page=1,numberItem=12,category)=>{
+    return axios.post("/manga/get-list-category",{
+        page: page,
+        numberItem: numberItem,
+        type: 0,
+        category:category
+    })
+}

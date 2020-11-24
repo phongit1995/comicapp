@@ -21,7 +21,7 @@ const HomeHeader = () => {
         <View style={styles.header}>
             <View style={{ alignContent: "center", flexDirection: 'row', alignItems: 'center' }}>
                 <Feather name="menu" size={30}></Feather>
-                <Text style={{ textTransform: "uppercase", marginLeft: 10, fontSize: 16, fontWeight: "bold" }}>Manga</Text>
+                <Text style={{ textTransform: "uppercase", marginLeft: 20, fontSize: 16, fontWeight: "bold" }}>Manga Vip</Text>
             </View>
             <View style={{ marginRight: 10 }} >
                 <EvilIcons name={"search"} size={30} />

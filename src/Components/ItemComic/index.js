@@ -15,7 +15,7 @@ const ItemComic = ({ item }) => {
             <View style={{ justifyContent: 'center', height: '70%', marginBottom: 10 }}>
                 <Image source={{ uri: item.image }} style={styles.imageRecommend}></Image>
             </View>
-            <View style={{ justifyContent: 'space-between', height: '30%', marginHorizontal: 10, }}>
+            <View style={{ justifyContent: 'space-between', height: '25%', marginHorizontal: 10, }}>
                 <Text numberOfLines={2} style={styles.nameComic}>{item.name}</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 5 }}>
                     <Feather name="eye" size={10} style={{ marginRight: 5 }}></Feather>

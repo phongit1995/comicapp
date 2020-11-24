@@ -1,11 +1,11 @@
 import React ,{useState,useEffect} from 'react';
-import {Text,View,StyleSheet,Dimensions,ActivityIndicator}from 'react-native';
+import {Text,View,StyleSheet,Dimensions,ActivityIndicator,StatusBar}from 'react-native';
 const {width} = Dimensions.get("window");
 import { TabView, SceneMap ,TabBar} from 'react-native-tab-view';
 import CategoryPage from './CategoryPage';
 import {getListCategory} from './../../api/category';
 const Category = ()=>{
-    const [listPage,setListPage]=useState([]);
+    const [listPage,setListPage]=useState(["Action"]);
     const [index, setIndex] = React.useState(0);
     const [loading,setLoading]=React.useState(true);
     const renderScene = ({ route }) => {
@@ -17,7 +17,6 @@ const Category = ()=>{
                 let listCategory = result.data.data.map(item=>item.name);
                 setListPage([...listCategory]);
                 setLoading(false);
-                
             }
         })
     },[])
@@ -27,13 +26,14 @@ const Category = ()=>{
         }
         return <Text style={styles.labelStyle}>{route.title.toUpperCase()}</Text>
     }
+    if(loading){
+        return  ( <View style={{flex:1,justifyContent:"center"}}>
+                    <ActivityIndicator size="large" color="#e84d35" />
+                </View>)
+    }
     return (
         <View style={styles.container}>
-            {/* <CategoryHeader/> */}
-            {loading?
-            <View style={{flex:1,justifyContent:"center"}}>
-                <ActivityIndicator size="large" color="#00ff00" />
-            </View>:
+            <StatusBar barStyle="light-content"/>
             <TabView 
                 initialLayout={{ width: Dimensions.get('window').width }}
                 lazy={true}
@@ -60,7 +60,7 @@ const Category = ()=>{
                         />
                     )
                 }}
-            />}
+            />
         </View>
     )
 }

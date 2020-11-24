@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconEvilIcons from 'react-native-vector-icons/EvilIcons';
 import IconFather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as SCREEN from './../constants/screen';
 import Home from './Home/index';
 import History from './History';
@@ -42,10 +43,10 @@ const BottomTab = ()=>{
                 options={{ title: 'Trang Chủ',
                 tabBarIcon:({focused})=>{
                     if(focused){
-                        return <Icon name={"home"} size={30}/>
+                        return <Ionicons name={"ios-home-outline"} size={25}/>
                     }
                     else {
-                        return <Icon name={"home"} size={20}/>
+                        return <Ionicons name={"ios-home-outline"} size={20}/>
                     }
                 }}}
             />
@@ -55,7 +56,7 @@ const BottomTab = ()=>{
                 options={{ title: 'Thể Loại' ,
                 tabBarIcon:({focused})=>{
                     if(focused){
-                        return <IconFather name={"layers"} size={30}/>
+                        return <IconFather name={"layers"} size={25}/>
                     }
                     else {
                         return <IconFather name={"layers"} size={20}/>
@@ -68,7 +69,7 @@ const BottomTab = ()=>{
                 options={{ title: 'Theo Dõi' ,
                 tabBarIcon:({focused})=>{
                     if(focused){
-                        return <Icon name={"wifi"} size={30}/>
+                        return <Icon name={"wifi"} size={25}/>
                     }
                     else {
                         return <Icon name={"wifi"} size={20}/>
@@ -81,7 +82,7 @@ const BottomTab = ()=>{
                 options={{ title: 'Lịch Sử',
                 tabBarIcon:({focused})=>{
                     if(focused){
-                        return <FontAwesome name={"calendar"} size={30}/>
+                        return <FontAwesome name={"calendar"} size={25}/>
                     }
                     else {
                         return <FontAwesome name={"calendar"} size={20}/>
@@ -94,7 +95,7 @@ const BottomTab = ()=>{
                 options={{ title: 'Tôi' ,
                 tabBarIcon:({focused})=>{
                     if(focused){
-                        return <IconEvilIcons name={"user"} size={30}/>
+                        return <IconEvilIcons name={"user"} size={25}/>
                     }
                     else {
                         return <IconEvilIcons name={"user"} size={20}/>
