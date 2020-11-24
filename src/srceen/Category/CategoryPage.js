@@ -1,10 +1,11 @@
 import React from 'react';
 import {View,Text} from 'react-native';
-const CategoryPage =(type)=>{
+const CategoryPage =({type})=>{
+    console.log(type);
     return(
         <View>
-            <Text>Category</Text>
+            <Text>{type}</Text>
         </View>
     )
 }
-export default CategoryPage;
+export default React.memo(CategoryPage);
