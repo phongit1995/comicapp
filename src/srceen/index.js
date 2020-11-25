@@ -16,6 +16,7 @@ import Info from './Info';
 import Login from './Login'
 import DetialComic from './DetialComic';
 import PageComic from './PageComic';
+import Search from './Search';
 const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Screen=()=>{
@@ -23,13 +24,14 @@ const Screen=()=>{
         <NavigationContainer >
              <Stack.Navigator screenOptions={{headerShown:false}}>
                 <Stack.Screen name={SCREEN.MAIN_SCREEN} component={BottomTab} />
-                <Stack.Screen name={SCREEN.LOGIN_SCREEN} component={Login} />
+                <Stack.Screen name={SCREEN.LOGIN_SCREEN} component={Login} options={{...TransitionPresets.SlideFromRightIOS}}/>
                 <Stack.Screen name={SCREEN.DETIAL_COMIC_SCREEN} component={DetialComic} options={{...TransitionPresets.SlideFromRightIOS}}/>
                 <Stack.Screen name={SCREEN.PAGE_COMIC_SCREEN} component={PageComic} 
                     options={({route})=>({
                         title:route.params.type==1?"Truyện Mới Nhất":"Truyện Hot Nhất",
                         headerShown:true,...TransitionPresets.SlideFromRightIOS
-                    })}/>
+                })}/>
+                <Stack.Screen name={SCREEN.SEARCH_SCREEN} component={Search} options={{...TransitionPresets.SlideFromRightIOS}}/>
              </Stack.Navigator>
         </NavigationContainer>
     )
