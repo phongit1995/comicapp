@@ -33,3 +33,10 @@ export const getListByCategorySortViews=(page=1,numberItem=12,category)=>{
         category:category
     })
 }
+export const searchComicByName=(page=1,numberItem=10,name)=>{
+    return axios.post("/manga/search-manga",{
+        page: page,
+        numberItem: numberItem,
+        name:name
+    })
+}
