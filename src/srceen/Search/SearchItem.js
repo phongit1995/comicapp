@@ -3,9 +3,11 @@ import {View,StyleSheet ,Dimensions,TouchableOpacity,Text,Image,ScrollView} from
 import {formatViews} from '../../common/stringHelper';
 import Feather from 'react-native-vector-icons/Feather';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigation  } from '@react-navigation/native';
 const {width,height} = Dimensions.get("window");
 
 const SearchItem=({data})=>{
+    const navigation = useNavigation();
     const showCategory=()=>{
         return data.category.map((item)=>{
             return (
@@ -13,13 +15,16 @@ const SearchItem=({data})=>{
             )
         })
     }
+    const _ClickPage=()=>{
+        console.log("Click");
+    }
     return(
         <View style={styles.containerItem}>
-            <View>
+            <TouchableOpacity onPress={_ClickPage}>
                 <Image  source={{uri:data.image}} style={styles.Image}/>
-            </View>
+            </TouchableOpacity>
             <View style={{paddingHorizontal:10,justifyContent:"space-around",flex:1}}>
-                <View style={{flexDirection:"row",alignItems:"center"}}>
+                <TouchableOpacity style={{flexDirection:"row",alignItems:"center"}} onPress={_ClickPage}>
                     <View style={{marginRight:4,justifyContent:"center",alignItems:"center"}}>
                         {
                             data.manga_status==1?
@@ -28,7 +33,7 @@ const SearchItem=({data})=>{
                         }
                     </View>
                     <Text numberOfLines={1} style={styles.nameComic}>{data.name}</Text>
-                </View>
+                </TouchableOpacity>
                 <Text style={{color:"#a5a5a5"}} numberOfLines={1}>{data.author}</Text>
                 <View>
                 <ScrollView style={{flexDirection:"row"}}
@@ -61,7 +66,7 @@ const styles = StyleSheet.create({
         marginTop:5,
         fontFamily: "Nunito-SemiBold",
         fontSize:14,
-        fontWeight:"bold",
+        fontWeight:"900",
         flex:1
     },
     textEndComic:{
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
         fontSize:9,
         paddingVertical:3,
         paddingHorizontal:5,
-        backgroundColor:"#d8e889",
+        backgroundColor:"#f5ccb0",
         color:"white",
         marginRight:3,
         borderRadius:5
