@@ -4,6 +4,7 @@ import {formatViews} from '../../common/stringHelper';
 import Feather from 'react-native-vector-icons/Feather';
 import { v4 as uuidv4 } from 'uuid';
 import { useNavigation  } from '@react-navigation/native';
+import * as SCREEN from './../../constants/screen';
 const {width,height} = Dimensions.get("window");
 
 const SearchItem=({data})=>{
@@ -16,7 +17,7 @@ const SearchItem=({data})=>{
         })
     }
     const _ClickPage=()=>{
-        console.log("Click");
+        navigation.navigate(SCREEN.DETIAL_COMIC_SCREEN,{id:data._id})
     }
     return(
         <View style={styles.containerItem}>
