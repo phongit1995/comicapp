@@ -17,6 +17,7 @@ import Login from './Login'
 import DetialComic from './DetialComic';
 import PageComic from './PageComic';
 import Search from './Search';
+import Setting from './Setting';
 const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Screen=()=>{
@@ -92,15 +93,15 @@ const BottomTab = ()=>{
                 }}}
             />
             <TabBottom.Screen 
-                name={SCREEN.INFO_SCREEN} 
-                component={Info}
-                options={{ title: 'Tôi' ,
+                name={SCREEN.SETTING_SCREEN} 
+                component={Setting}
+                options={{ title: 'Cài Đặt' ,
                 tabBarIcon:({focused})=>{
                     if(focused){
-                        return <IconEvilIcons name={"user"} size={25}/>
+                        return <IconFather name={"settings"} size={25}/>
                     }
                     else {
-                        return <IconEvilIcons name={"user"} size={20}/>
+                        return <IconFather name={"settings"} size={20}/>
                     } 
                 }}} 
             />
