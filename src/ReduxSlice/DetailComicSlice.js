@@ -1,31 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchListComic } from '../api/ListComic'
+import { getDetialComic } from '../api/comic'
+
 const initialState = {
     loading: true,
     error: '',
     data: {}
-}
+};
 
-const ListComicSlice = createSlice({
-    name: 'listComic',
+const DetailComic = createSlice({
+    name: 'DetailComic',
     initialState,
     reducers: {},
     extraReducers: {
-        [fetchListComic.pending]: (state, action) => {
+        [getDetialComic.pending]: (state, action) => {
             state.loading = true;
             state.data = action.payload;
         },
-        [fetchListComic.fulfilled]: (state, action) => {
+        [getDetialComic.fulfilled]: (state, action) => {
             state.loading = false;
             state.data = action.payload.data;
         },
-        [fetchListComic.rejected]: (state, action) => {
+        [getDetialComic.rejected]: (state, action) => {
             state.loading = false;
             state.error = action.error;
         },
-
     }
 })
 
-const { reducer: userReducer } = ListComicSlice;
+
+const { reducer: userReducer }  = DetailComic
 export default userReducer
