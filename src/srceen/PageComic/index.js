@@ -42,8 +42,8 @@ const PageComic =()=>{
     const _renderFooterList=()=>{
         if(!footerLoading)return null ;
         return (
-            <View style={{paddingVertical:20,borderTopWidth:0.7,backgroundColor:"#CEDOCE"}}>
-                <ActivityIndicator size="large" color="#00ff00" animating />
+            <View style={{paddingVertical:20,backgroundColor:"#CEDOCE"}}>
+                <ActivityIndicator size="large" color="#e84d35" animating />
             </View>
         )
     }
@@ -51,7 +51,7 @@ const PageComic =()=>{
         <SafeAreaView  style={styles.container}>
             {loading?
             <View style={styles.ContainerLoading}>
-                <ActivityIndicator size="large" color="#00ff00" />
+                <ActivityIndicator size="large" color="#e84d35" animating />
             </View> :
             <View style={styles.containerItem}>
                 <FlatList

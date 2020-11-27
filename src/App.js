@@ -5,7 +5,8 @@ import Screen from './srceen';
 import store from './app/store'
 import { MenuProvider } from 'react-native-popup-menu';
 import {fcmService} from './firebase/FCMService'
-import {localNotificationService} from './firebase/LocalNotificationService'
+import {localNotificationService} from './firebase/LocalNotificationService';
+import SqlHelper from './common/SQLHelper';
 export default App = () => {
   useEffect(() => {
     fcmService.registerAppWithFCM()
