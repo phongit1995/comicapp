@@ -18,6 +18,7 @@ import DetialComic from './DetialComic';
 import PageComic from './PageComic';
 import Search from './Search';
 import Setting from './Setting';
+import analytics from '@react-native-firebase/analytics';
 const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Screen=()=>{
