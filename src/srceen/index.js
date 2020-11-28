@@ -24,6 +24,7 @@ const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const Screen = () => {
+    const routeNameRef = React.useRef();
     return (
         <NavigationContainer
             ref={RootNavigation.navigationRef}
