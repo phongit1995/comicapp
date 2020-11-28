@@ -22,8 +22,23 @@ import analytics from '@react-native-firebase/analytics';
 const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Screen=()=>{
+    const routeNameRef = React.useRef();
+    const navigationRef = React.useRef();
     return(
-        <NavigationContainer >
+        <NavigationContainer 
+        ref={navigationRef}
+        onReady={() => routeNameRef.current = navigationRef.current.getCurrentRoute().name}
+        onStateChange={() => {
+          const previousRouteName = routeNameRef.current;
+          const currentRouteName = navigationRef.current.getCurrentRoute().name
+          if (previousRouteName !== currentRouteName) {
+            analytics().logScreenView({
+                screen_name: currentRouteName,
+              });
+          }
+          routeNameRef.current = currentRouteName;
+        }}
+        >
              <Stack.Navigator screenOptions={{headerShown:false}}>
                 <Stack.Screen name={SCREEN.MAIN_SCREEN} component={BottomTab} />
                 <Stack.Screen name={SCREEN.LOGIN_SCREEN} component={Login} options={{...TransitionPresets.SlideFromRightIOS}}/>
