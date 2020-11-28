@@ -19,12 +19,27 @@ import PageComic from './PageComic';
 import Search from './Search';
 import Setting from './Setting';
 import analytics from '@react-native-firebase/analytics';
+import * as RootNavigation from './RefNavigation';
 const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
 const Screen = () => {
     return (
-        <NavigationContainer >
-            <Stack.Navigator screenOptions={{ headerShown: false }} >
+        <NavigationContainer
+            ref={RootNavigation.navigationRef}
+            onReady={() => routeNameRef.current = RootNavigation.navigationRef.current.getCurrentRoute().name}
+            onStateChange={() => {
+                const previousRouteName = routeNameRef.current;
+                const currentRouteName = RootNavigation.navigationRef.current.getCurrentRoute().name
+                if (previousRouteName !== currentRouteName) {
+                    analytics().logScreenView({
+                        screen_name: currentRouteName,
+                    });
+                }
+                routeNameRef.current = currentRouteName;
+            }}
+        >
+            <Stack.Navigator screenOptions={{ headerShown: false }}>
                 <Stack.Screen name={SCREEN.MAIN_SCREEN} component={BottomTab} />
                 <Stack.Screen name={SCREEN.LOGIN_SCREEN} component={Login} options={{ ...TransitionPresets.SlideFromRightIOS }} />
                 <Stack.Screen name={SCREEN.DETIAL_COMIC_SCREEN} component={DetialComic} options={{ ...TransitionPresets.SlideFromRightIOS }} />
