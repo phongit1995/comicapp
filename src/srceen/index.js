@@ -17,6 +17,8 @@ import Login from './Login'
 import DetialComic from './DetialComic';
 import PageComic from './PageComic';
 import Search from './Search';
+import Setting from './Setting';
+import analytics from '@react-native-firebase/analytics';
 const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
 const Screen = () => {
@@ -113,6 +115,22 @@ const BottomTab = () => {
                         }
                     }
                 }}
+            />
+            <TabBottom.Screen
+                name={SCREEN.SETTING_SCREEN}
+                component={Setting}
+                options={{
+                    title: 'Cài Đặt',
+                    tabBarIcon: ({ focused }) => {
+                        if (focused) {
+                            return <IconFather name={"settings"} size={25} />
+                        }
+                        else {
+                            return <IconFather name={"settings"} size={20} />
+                        }
+                    }
+                }}
+
             />
         </TabBottom.Navigator>
     )

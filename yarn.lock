@@ -1187,6 +1187,11 @@
   dependencies:
     invariant "^2.2.4"
 
+"@react-native-firebase/analytics@^10.1.0":
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-10.1.0.tgz#8b503f08051ff3cf730ad83d418a307ffd32f11c"
+  integrity sha512-upTGcw5wl47lIeyhjsKFlXuJz2Fg7BbuAcgwq+FJ9sqkTJxDPRW/aHACsd9+WAs/UiwcGEpcT8gzgkvoJp68dg==
+
 "@react-native-firebase/app@^10.0.0":
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-10.0.0.tgz#dc18af26accb31028eab00dd36f486fee046e63e"
@@ -5971,6 +5976,11 @@ react-native-screens@^2.14.0:
   version "2.14.0"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.14.0.tgz#2f0534c76e5bd0a95908ca61ec5d1cb7818d5f1e"
   integrity sha512-7EfxpYiJVvlFQNb1NlkEz7JRELVMLNIsrKo8jHq0+vXbDq+UxnAm/dMeYIXi8hY5iwqzk43uNPL8VyGPcLfBGQ==
+
+react-native-sqlite-storage@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-sqlite-storage/-/react-native-sqlite-storage-5.0.0.tgz#fb015c928b59d3000360fb0774a99545e7a695d6"
+  integrity sha512-c1Joq3/tO1nmIcP8SkRZNolPSbfvY8uZg5lXse0TmjIPC0qHVbk96IMvWGyly1TmYCIpxpuDRc0/xCffDbYIvg==
 
 react-native-tab-view@^2.15.2:
   version "2.15.2"
