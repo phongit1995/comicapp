@@ -17,6 +17,7 @@ export default React.memo(Detail)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+
         paddingVertical: 10,
         paddingHorizontal: 10,
         backgroundColor: '#fff',
