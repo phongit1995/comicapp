@@ -14,7 +14,7 @@ export default function ViewComic({ route }) {
     useEffect(() => {
         (async () => {
             const resultData = await getDetailChapter(id)
-
+            console.log(resultData);
             if (resultData?.data?.status == "success") {
                 // setName(resultData.data?.data.name)
                 setImagesList(resultData.data?.data?.images)
@@ -51,7 +51,12 @@ export default function ViewComic({ route }) {
                             (
                                 <View style={styles.Img}>
                                     <Image style={{ width: '100%', height: (width * 3) / 2 }}
-                                        source={{ uri: item }}
+                                        source={{ uri: item ,
+                                            headers:{
+                                                Referer:"https://www.nettruyen.com/"
+                                            }
+                                        }}
+
                                     >
                                     </Image>
                                 </View>
