@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, ActivityIndicator, Dimensions } from 'react-nat
 import { RectButton } from 'react-native-gesture-handler'
 import { getListChapter } from './../../api/comic';
 const { height, width } = Dimensions.get("window");
+import { useNavigation } from '@react-navigation/native';
 function Chapter({ id }) {
 
     const [loading, setLoading] = React.useState(true);
     const [dataChap, setDataChap] = React.useState();
     const dataChapMemo = React.useMemo(() => dataChap, [dataChap])
-
+    const navigation = useNavigation();
     React.useEffect(() => {
         (async () => {
             const resultChap = await getListChapter(id);
@@ -20,8 +21,9 @@ function Chapter({ id }) {
     }, [])
     const showChap = () => {
         return dataChapMemo.map((item) => {
+     
             return (
-                <RectButton key={item._id} >
+                <RectButton key={item._id} onPress={() => navigation.navigate('VIEWS_COMIC', { id: item._id })}>
                     <View style={styles.Chapter_}>
                         <Text style={styles.name} >Chapter {item.index}</Text>
                         <Text>{item.createdAt.split(/T.*/)[0]}</Text>
@@ -64,7 +66,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#5c6b73'
     },
     loading: {
-        marginTop: height / 4,
+
         alignItems: 'center',
         justifyContent: 'center'
     }

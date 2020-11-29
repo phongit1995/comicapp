@@ -13,6 +13,7 @@ import Detail from './Detail';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 const HEADER_MIN_HEIGHT = 50;
 const Space = 35;
+const HEADER_HEIGHT = 0;
 const DetialComic = (props) => {
     const router = useRoute();
     const { id } = router.params;
@@ -83,6 +84,13 @@ const DetialComic = (props) => {
 
         })
     }, [dataMemo])
+
+    const translateY__ = scrollY.interpolate({
+        inputRange: [0, HEADER_HEIGHT],
+        outputRange: [0, -HEADER_HEIGHT],
+        extrapolate: "clamp",
+    });
+
     if (loading) {
         return (
             <View style={styles.loading}>
@@ -130,14 +138,27 @@ const DetialComic = (props) => {
                             </View>
                         </View>
                     </View>
+                    <View>
+                        <Animated.View
+                            style={[
+                                {
+                                    marginTop: HEADER_HEIGHT,
+                                    flex: 1,
+                                    marginBottom: -HEADER_HEIGHT,
+                                },
+                                { transform: [{ translateY: translateY__ }] },
+                            ]}
+                        >
+                            <TabView
+                                navigationState={{ index, routes }}
+                                renderScene={renderScene}
+                                onIndexChange={setIndex}
+                                renderTabBar={renderTabBar}
+                                initialLayout={initialLayout}
+                            />
+                        </Animated.View>
+                    </View>
 
-                    <TabView
-                        navigationState={{ index, routes }}
-                        renderScene={renderScene}
-                        onIndexChange={setIndex}
-                        renderTabBar={renderTabBar}
-                        initialLayout={initialLayout}
-                    />
                 </Animated.ScrollView>
                 <Animated.View style={[styles.contai, { transform: [{ translateY }], width: Wid, left: left_, }]}>
                     <Animated.Text
