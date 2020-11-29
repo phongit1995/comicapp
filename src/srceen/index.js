@@ -17,6 +17,7 @@ import Login from './Login'
 import DetialComic from './DetialComic';
 import PageComic from './PageComic';
 import Search from './Search';
+import ViewComic from './DetialComic/ViewComic/ViewComic'
 import Setting from './Setting';
 import analytics from '@react-native-firebase/analytics';
 import * as RootNavigation from './RefNavigation';
@@ -50,6 +51,7 @@ const Screen = () => {
                         headerShown: true, ...TransitionPresets.SlideFromRightIOS
                     })} />
                 <Stack.Screen name={SCREEN.SEARCH_SCREEN} component={Search} options={{ ...TransitionPresets.SlideFromRightIOS }} />
+                <Stack.Screen name={SCREEN.VIEWS_COMIC} component={ViewComic} options={{ ...TransitionPresets.SlideFromRightIOS }} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -1,28 +1,37 @@
 import React from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, Dimensions } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
+import { getListChapter } from './../../api/comic';
 const { height, width } = Dimensions.get("window");
-function Chapter({ data }) {
+import { useNavigation } from '@react-navigation/native';
+function Chapter({ id }) {
 
     const [loading, setLoading] = React.useState(true);
+    const [dataChap, setDataChap] = React.useState();
+    const dataChapMemo = React.useMemo(() => dataChap, [dataChap])
+    const navigation = useNavigation();
+    React.useEffect(() => {
+        (async () => {
+            const resultChap = await getListChapter(id);
+            if (resultChap?.data?.status == "success") {
+                await setDataChap(resultChap?.data?.data)
+                setLoading(false);
+            }
+        })()
+    }, [])
     const showChap = () => {
-        return data.map((item) => {
+        return dataChapMemo.map((item) => {
+     
             return (
-                <RectButton key={item._id} >
+                <RectButton key={item._id} onPress={() => navigation.navigate('VIEWS_COMIC', { id: item._id })}>
                     <View style={styles.Chapter_}>
                         <Text style={styles.name} >Chapter {item.index}</Text>
-                        <Text>{item.createdAt}</Text>
+                        <Text>{item.createdAt.split(/T.*/)[0]}</Text>
                     </View>
                 </RectButton>
             )
         })
     }
-    React.useEffect(() => {
-        const settime = setTimeout(() => {
-            setLoading(false);
-        }, 100);
-        return () => clearTimeout(settime)
-    }, [])
     return (
         <View style={styles.container}>
             {
@@ -40,7 +49,6 @@ export default React.memo(Chapter)
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
 
         backgroundColor: '#fff'
     },
@@ -58,8 +66,10 @@ const styles = StyleSheet.create({
         borderBottomColor: '#5c6b73'
     },
     loading: {
-        marginTop: height / 4,
+
         alignItems: 'center',
         justifyContent: 'center'
     }
 })
+
+

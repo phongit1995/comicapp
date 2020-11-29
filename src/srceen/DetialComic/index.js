@@ -1,31 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { View, Dimensions, StyleSheet, Text, Image, ActivityIndicator, Animated, ScrollView, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { getDetialComic, getListChapter } from './../../api/comic';
+import { getDetialComic } from './../../api/comic';
 import Header from './HeaderDetial';
 import Chapter from './Chapter'
 import TouchableScale from 'react-native-touchable-scale';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 const { height, width } = Dimensions.get("window");
-
+const initialLayout = { width: Dimensions.get('window').width };
 import Detail from './Detail';
-import { RectButton } from 'react-native-gesture-handler';
+
+import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 const HEADER_MIN_HEIGHT = 50;
 const Space = 35;
+const HEADER_HEIGHT = 0;
 const DetialComic = (props) => {
     const router = useRoute();
     const { id } = router.params;
-    const [tab, settab] = React.useState(0);
+    const [routes] = React.useState([
+        { key: 'first', title: 'Chi tiết' },
+        { key: 'second', title: 'Chapter' },
+    ]);
+    const [index, setIndex] = React.useState(0);
     const [data, setData] = React.useState();
-    const [dataChap, setDataChap] = React.useState();
+
     const [loading, setLoading] = useState(true);
     const dataMemo = React.useMemo(() => data, [data])
-    const dataChapMemo = React.useMemo(() => dataChap, [dataChap])
+
 
     const scrollY = React.useRef(new Animated.Value(0)).current;
     const translateY = scrollY.interpolate({
         inputRange: [0, HEADER_MIN_HEIGHT, HEADER_MIN_HEIGHT + Space, height],
         outputRange: [HEADER_MIN_HEIGHT, 15, 15, 15,
         ],
+    });
+    const translateY_ = scrollY.interpolate({
+        inputRange: [0, height],
+        outputRange: [0, 0],
     });
     const size_ = scrollY.interpolate({
         inputRange: [0, HEADER_MIN_HEIGHT + Space, height],
@@ -45,23 +56,25 @@ const DetialComic = (props) => {
     });
     useEffect(() => {
         (async () => {
-            const [resultDetail, resultChap] = await Promise.all([getDetialComic(id), getListChapter(id)]);
-
-            if (resultDetail?.data?.status == "success" && resultChap?.data?.status == "success") {
+            const resultDetail = await getDetialComic(id)
+            if (resultDetail?.data?.status == "success") {
                 await setData(resultDetail?.data?.data)
-                await setDataChap(resultChap?.data?.data)
                 setLoading(false);
             }
         })()
-
     }, [])
     const Detail_ = React.useCallback(() => {
         return <Detail data={dataMemo.description}></Detail>
     }, [dataMemo])
 
     const Chap_ = React.useCallback(() => {
-        return <Chapter data={dataChapMemo}></Chapter>
-    }, [dataChapMemo])
+        return <Chapter id={id}></Chapter>
+    }, [])
+
+    const renderScene = SceneMap({
+        first: Detail_,
+        second: Chap_,
+    });
 
     const showCategory = React.useCallback(() => {
         return dataMemo.category.map((item, index) => {
@@ -71,6 +84,13 @@ const DetialComic = (props) => {
 
         })
     }, [dataMemo])
+
+    const translateY__ = scrollY.interpolate({
+        inputRange: [0, HEADER_HEIGHT],
+        outputRange: [0, -HEADER_HEIGHT],
+        extrapolate: "clamp",
+    });
+
     if (loading) {
         return (
             <View style={styles.loading}>
@@ -83,7 +103,7 @@ const DetialComic = (props) => {
                 <Header />
                 <Animated.ScrollView
                     showsVerticalScrollIndicator={false}
-                    stickyHeaderIndices={[1]}
+                    // stickyHeaderIndices={[1]}
                     onScroll={Animated.event(
                         [
                             {
@@ -118,25 +138,25 @@ const DetialComic = (props) => {
                             </View>
                         </View>
                     </View>
-                    <View style={{ borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
-                        <View style={styles.tab_}>
-                            <TouchableOpacity style={[styles.description_comic, tab === 0 && { borderBottomWidth: 2, borderBottomColor: '#fff' }]} onPress={() => settab(0)}>
-                                <Text style={styles.title}>Chi tiết</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={[styles.Chap_comic, tab === 1 && { borderBottomWidth: 2, borderBottomColor: '#fff' }]} onPress={() => settab(1)}>
-                                <Text style={styles.title}>Chương</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={{ flex: 1 }}>
-                        {
-                            tab === 0 && Detail_()
-                        }
-                    </View>
-                    <View style={{ flex: 1 }}>
-                        {
-                            tab === 1 && Chap_()
-                        }
+                    <View>
+                        <Animated.View
+                            style={[
+                                {
+                                    marginTop: HEADER_HEIGHT,
+                                    flex: 1,
+                                    marginBottom: -HEADER_HEIGHT,
+                                },
+                                { transform: [{ translateY: translateY__ }] },
+                            ]}
+                        >
+                            <TabView
+                                navigationState={{ index, routes }}
+                                renderScene={renderScene}
+                                onIndexChange={setIndex}
+                                renderTabBar={renderTabBar}
+                                initialLayout={initialLayout}
+                            />
+                        </Animated.View>
                     </View>
 
                 </Animated.ScrollView>
@@ -149,6 +169,27 @@ const DetialComic = (props) => {
                         ]}
                     >{dataMemo.name}</Animated.Text>
                 </Animated.View>
+                <Animated.View style={[styles.contai_, { transform: [{ translateY: translateY_ }] }]}>
+                    <View style={{
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        paddingVertical: 10,
+                        flexDirection: 'row',
+                        width: '100%'
+                    }}>
+                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                            <EvilIcons name="heart" size={25} color="#e63946" />
+                            <Text style={{ fontSize: 12, color: '#b7b7a4' }}>Theo dõi</Text>
+                        </View>
+                        <TouchableScale
+                            activeScale={0.9}
+                            onPress={() => true}
+                            useNativeDriver
+                            style={styles.appButtonContainer_}>
+                            <Text style={styles.appButtonText_}>Đọc Truyện</Text>
+                        </TouchableScale>
+                    </View>
+                </Animated.View>
             </View>
         )
     }
@@ -156,6 +197,13 @@ const DetialComic = (props) => {
 }
 
 export default React.memo(DetialComic);
+const renderTabBar = props => (
+    <TabBar
+        {...props}
+        indicatorStyle={{ backgroundColor: 'white' }}
+        style={{ backgroundColor: '#e63946' }}
+    />
+);
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -172,8 +220,9 @@ const styles = StyleSheet.create({
     },
     header: {
         paddingHorizontal: 10,
-        backgroundColor: '#eea71d',
-        paddingTop: Space
+        backgroundColor: '#e63946',
+        paddingTop: Space,
+
     },
     nameComic: {
         textAlign: "center",
@@ -226,7 +275,7 @@ const styles = StyleSheet.create({
     },
     appButtonText: {
         fontSize: 12,
-        color: "#eea71d",
+        color: "#e63946",
         fontWeight: "bold",
         alignSelf: "center",
         textTransform: "uppercase"
@@ -240,7 +289,20 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         right: 0,
-        backgroundColor: '#eea71d'
+        backgroundColor: '#e63946'
+    },
+    contai_: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        left: 0,
+        zIndex: 999,
+        backgroundColor: '#fff',
+        elevation: 999,
+        alignSelf: "center",
+        borderTopColor: '#f1faee',
+        justifyContent: 'center',
+        borderTopWidth: 1
     },
     tab_: {
         paddingHorizontal: 10,
@@ -265,7 +327,23 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 16,
         color: '#fff'
-    }
+    },
+
+    appButtonContainer_: {
+        elevation: 2,
+        backgroundColor: "#e63946",
+        borderRadius: 150,
+        paddingVertical: 10,
+        width: width / 2
+    },
+    appButtonText_: {
+        fontSize: 12,
+        color: "#fff",
+        textAlign: 'center',
+        fontWeight: "bold",
+        alignSelf: "center",
+        textTransform: "uppercase"
+    },
 })
 
 

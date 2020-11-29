@@ -46,3 +46,8 @@ export const getListChapter = (id) => {
         manga_id: id
     })
 }
+export const getDetailChapter = (id) => {
+    return axios.post("/chapter/detial-chapter", {
+        id: id
+    })
+}
