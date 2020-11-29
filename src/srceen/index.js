@@ -17,7 +17,7 @@ import Login from './Login'
 import DetialComic from './DetialComic';
 import PageComic from './PageComic';
 import Search from './Search';
-import ViewComic from './DetialComic/ViewComic/ViewComic'
+import DetialChapter from './DetialChapter'
 import Setting from './Setting';
 import analytics from '@react-native-firebase/analytics';
 import * as RootNavigation from './RefNavigation';
@@ -51,7 +51,7 @@ const Screen = () => {
                         headerShown: true, ...TransitionPresets.SlideFromRightIOS
                     })} />
                 <Stack.Screen name={SCREEN.SEARCH_SCREEN} component={Search} options={{ ...TransitionPresets.SlideFromRightIOS }} />
-                <Stack.Screen name={SCREEN.VIEWS_COMIC} component={ViewComic} options={{ ...TransitionPresets.SlideFromRightIOS }} />
+                <Stack.Screen name={SCREEN.DETIAL_CHAPTER} component={DetialChapter} options={{ ...TransitionPresets.SlideFromRightIOS }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
@@ -115,21 +115,6 @@ const BottomTab = () => {
                         }
                         else {
                             return <FontAwesome name={"calendar"} size={20} />
-                        }
-                    }
-                }}
-            />
-            <TabBottom.Screen
-                name={SCREEN.INFO_SCREEN}
-                component={Info}
-                options={{
-                    title: 'Tôi',
-                    tabBarIcon: ({ focused }) => {
-                        if (focused) {
-                            return <IconEvilIcons name={"user"} size={25} />
-                        }
-                        else {
-                            return <IconEvilIcons name={"user"} size={20} />
                         }
                     }
                 }}

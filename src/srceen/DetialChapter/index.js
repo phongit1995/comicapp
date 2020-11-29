@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, Image, Dimensions, ActivityIndicator, } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, Dimensions, ActivityIndicator, } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 const { height, width } = Dimensions.get("screen");
-import { getDetailChapter } from '../../../api/comic'
-export default function ViewComic({ route }) {
+import { getDetailChapter } from './../../api/comic'
+export default function DetialComic({ route }) {
     const { id } = route.params
-
     const navigation = useNavigation();
     const [name, setName] = useState("Chi Tiết");
     const [imagesList, setImagesList] = useState()
@@ -14,7 +13,6 @@ export default function ViewComic({ route }) {
     useEffect(() => {
         (async () => {
             const resultData = await getDetailChapter(id)
-            console.log(resultData);
             if (resultData?.data?.status == "success") {
                 // setName(resultData.data?.data.name)
                 setImagesList(resultData.data?.data?.images)
@@ -46,6 +44,8 @@ export default function ViewComic({ route }) {
                 <View style={styles.content}>
                     <FlatList
                         data={imagesList}
+                        showsVerticalScrollIndicator ={false}
+                        showsHorizontalScrollIndicator={false}
                         keyExtractor={(item) => `${item}`}
                         renderItem={({ item }) =>
                             (
@@ -56,7 +56,7 @@ export default function ViewComic({ route }) {
                                                 Referer:"https://www.nettruyen.com/"
                                             }
                                         }}
-
+                                        resizeMode="stretch"
                                     >
                                     </Image>
                                 </View>
@@ -111,8 +111,6 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         flexDirection: "row",
         flex: 1,
-        marginTop: 10,
-        marginBottom: 10,
         shadowColor: "#000",
         shadowOffset: {
             width: 10,

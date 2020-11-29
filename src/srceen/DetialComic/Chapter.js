@@ -4,6 +4,7 @@ import { RectButton } from 'react-native-gesture-handler'
 import { getListChapter } from './../../api/comic';
 const { height, width } = Dimensions.get("window");
 import { useNavigation } from '@react-navigation/native';
+import * as SCREEN from  './../../constants/screen';
 function Chapter({ id }) {
 
     const [loading, setLoading] = React.useState(true);
@@ -11,19 +12,17 @@ function Chapter({ id }) {
     const dataChapMemo = React.useMemo(() => dataChap, [dataChap])
     const navigation = useNavigation();
     React.useEffect(() => {
-        (async () => {
-            const resultChap = await getListChapter(id);
-            if (resultChap?.data?.status == "success") {
-                await setDataChap(resultChap?.data?.data)
+        getListChapter(id).then(result=>{
+            if (result?.data?.status == "success") {
+                setDataChap(result?.data?.data)
                 setLoading(false);
             }
-        })()
+        }).then(error=>console.log(error))
     }, [])
     const showChap = () => {
         return dataChapMemo.map((item) => {
-     
             return (
-                <RectButton key={item._id} onPress={() => navigation.navigate('VIEWS_COMIC', { id: item._id })}>
+                <RectButton key={item._id} onPress={() => navigation.navigate(SCREEN.DETIAL_CHAPTER, { id: item._id })}>
                     <View style={styles.Chapter_}>
                         <Text style={styles.name} >Chapter {item.index}</Text>
                         <Text>{item.createdAt.split(/T.*/)[0]}</Text>
@@ -36,7 +35,7 @@ function Chapter({ id }) {
         <View style={styles.container}>
             {
                 loading ? <View style={styles.loading}>
-                    <ActivityIndicator size="large" color="#bf0603" />
+                    <ActivityIndicator size="large" color="#bf0603" style={{marginTop:20}}/>
                 </View> :
                     showChap()
             }

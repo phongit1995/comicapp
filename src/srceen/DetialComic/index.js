@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Dimensions, StyleSheet, Text, Image, ActivityIndicator, Animated, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Dimensions, StyleSheet, Text, Image, ActivityIndicator, Animated } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { getDetialComic } from './../../api/comic';
 import Header from './HeaderDetial';
@@ -155,6 +155,8 @@ const DetialComic = (props) => {
                                 onIndexChange={setIndex}
                                 renderTabBar={renderTabBar}
                                 initialLayout={initialLayout}
+                                lazy={true}
+                                lazyPreloadDistance={1}
                             />
                         </Animated.View>
                     </View>
