@@ -51,3 +51,15 @@ export const getDetailChapter = (id) => {
         id: id
     })
 }
+export const addDevicesManga=(manga_id,device)=>{
+    return axios.post("/manga/add-devices",{
+        manga_id: manga_id,
+        device: device
+    })
+}
+export const removeDevicesManga=(manga_id,device)=>{
+    return axios.post("/manga/remove-devices",{
+        manga_id: manga_id,
+        device: device
+    })
+}

@@ -6,6 +6,7 @@ import Header from './HeaderDetial';
 import Chapter from './Chapter'
 import TouchableScale from 'react-native-touchable-scale';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import SqlHelper from './../../common/SQLHelper';
 const { height, width } = Dimensions.get("window");
 const initialLayout = { width: Dimensions.get('window').width };
 import Detail from './Detail';
@@ -55,13 +56,13 @@ const DetialComic = (props) => {
 
     });
     useEffect(() => {
-        (async () => {
-            const resultDetail = await getDetialComic(id)
-            if (resultDetail?.data?.status == "success") {
-                await setData(resultDetail?.data?.data)
-                setLoading(false);
+        getDetialComic(id).then(result=>{
+            if (result?.data?.status == "success") {
+            setData(result?.data?.data);
+            SqlHelper.addHistoryManga(result.data.data._id,result.data.data.name,result.data.data.image);
+            setLoading(false);
             }
-        })()
+        })
     }, [])
     const Detail_ = React.useCallback(() => {
         return <Detail data={dataMemo.description}></Detail>
@@ -336,7 +337,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#e63946",
         borderRadius: 150,
         paddingVertical: 10,
-        width: width / 2
+        width: width / 1.5
     },
     appButtonText_: {
         fontSize: 12,

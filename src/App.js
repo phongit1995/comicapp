@@ -6,7 +6,6 @@ import store from './app/store'
 import { MenuProvider } from 'react-native-popup-menu';
 import {fcmService} from './firebase/FCMService'
 import {localNotificationService} from './firebase/LocalNotificationService';
-import * as RootNavigation from './srceen/RefNavigation';
 export default App = () => {
   useEffect(() => {
     fcmService.registerAppWithFCM()
