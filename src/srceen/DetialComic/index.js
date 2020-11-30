@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { View, Dimensions, StyleSheet, Text, Image, ActivityIndicator, Animated } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { getDetialComic } from './../../api/comic';
+import { getDetialComic ,addDevicesManga ,removeDevicesManga } from './../../api/comic';
 import Header from './HeaderDetial';
 import Chapter from './Chapter'
 import TouchableScale from 'react-native-touchable-scale';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import SqlHelper from './../../common/SQLHelper';
 const { height, width } = Dimensions.get("window");
 const initialLayout = { width: Dimensions.get('window').width };
+import {fcmService} from './../../firebase/FCMService';
 import Detail from './Detail';
 
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
@@ -18,6 +20,7 @@ const HEADER_HEIGHT = 0;
 const DetialComic = (props) => {
     const router = useRoute();
     const { id } = router.params;
+    const [isFollow,setIsFollow]=useState(false);
     const [routes] = React.useState([
         { key: 'first', title: 'Chi tiết' },
         { key: 'second', title: 'Chapter' },
@@ -60,10 +63,30 @@ const DetialComic = (props) => {
             if (result?.data?.status == "success") {
             setData(result?.data?.data);
             SqlHelper.addHistoryManga(result.data.data._id,result.data.data.name,result.data.data.image);
+            SqlHelper.getFollowManga(result.data.data._id).then(resultFollow=>{
+                if(resultFollow.length>0){
+                    setIsFollow(true)
+                }
+            })
             setLoading(false);
             }
         })
+        return ()=>{}
     }, [])
+    const _OnFollowComic= async()=>{ 
+        const token = await fcmService.getTokenService();
+        SqlHelper.addFollowManga(data._id,data.name,data.image);
+        addDevicesManga(data._id,token).then(result=>{
+            setIsFollow(data=>!data);
+        })
+    }
+    const _OnUnFollowComic= async()=>{ 
+        const token = await fcmService.getTokenService();
+        SqlHelper.unFollowManga(data._id);
+        removeDevicesManga(data._id,token).then(result=>{
+            setIsFollow(data=>!data);
+        })
+    }
     const Detail_ = React.useCallback(() => {
         return <Detail data={dataMemo.description}></Detail>
     }, [dataMemo])
@@ -82,7 +105,6 @@ const DetialComic = (props) => {
             return (
                 <Text key={index} style={styles.normal}>{item} - </Text>
             )
-
         })
     }, [dataMemo])
 
@@ -157,7 +179,6 @@ const DetialComic = (props) => {
                                 renderTabBar={renderTabBar}
                                 initialLayout={initialLayout}
                                 lazy={true}
-                                lazyPreloadDistance={1}
                             />
                         </Animated.View>
                     </View>
@@ -180,10 +201,18 @@ const DetialComic = (props) => {
                         flexDirection: 'row',
                         width: '100%'
                     }}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                            <EvilIcons name="heart" size={25} color="#e63946" />
-                            <Text style={{ fontSize: 12, color: '#b7b7a4' }}>Theo dõi</Text>
-                        </View>
+                        {
+                            isFollow?
+                            <TouchableScale onPress={_OnUnFollowComic} style={{ justifyContent: 'center', alignItems: 'center' }} activeScale={0.9} >
+                                <AntDesign name="heart" size={25} color="#e63946"  />
+                                <Text style={{ fontSize: 12, color: '#b7b7a4' }}>Đã Theo dõi</Text>
+                            </TouchableScale>:
+                            <TouchableScale onPress={_OnFollowComic} style={{ justifyContent: 'center', alignItems: 'center' }} activeScale={0.9} >
+                                <EvilIcons name="heart" size={25} color="#e63946" />
+                                <Text style={{ fontSize: 12, color: '#b7b7a4' }}>Theo dõi</Text>
+                            </TouchableScale>
+                        }
+                        
                         <TouchableScale
                             activeScale={0.9}
                             onPress={() => true}

@@ -42,7 +42,15 @@ class FCMService {
             console.log("[FCMService] getToken rejected ", error)
         })
     }
-
+    getTokenService=()=>{
+        return new Promise((resolve,reject)=>{
+            messaging().getToken().then((fcmToken)=>{
+                resolve(fcmToken);
+            }).catch(error=>{
+                reject(error)
+            })
+        })
+    }
     requestPermission = (onRegister) => {
          messaging().requestPermission()
         .then(() => {

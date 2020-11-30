@@ -41,10 +41,28 @@ class SqlHelper {
             },(error)=>console.log(error))
         });
     }
+    unFollowManga(manga_id){
+        return new Promise((reslove,reject)=>{
+            this.db.transaction((tx)=>{
+                tx.executeSql("DELETE FROM manga_follow WHERE manga_id= ?",[manga_id],(txs,result)=>{
+                    reslove(result.rows.raw());
+                },(error)=>{reject(error)})
+            })
+        })
+    }
     GetListFollower(){
         return new Promise((reslove,reject)=>{
             this.db.transaction((tx)=>{
                 tx.executeSql("SELECT * FROM manga_follow ORDER  BY date_time DESC ",[],(txs,result)=>{
+                    reslove(result.rows.raw());
+                },(error)=>{reject(error)})
+            })
+        })
+    }
+    getFollowManga(manga_id){
+        return new Promise((reslove,reject)=>{
+            this.db.transaction((tx)=>{
+                tx.executeSql("SELECT * FROM manga_follow where manga_id =? ",[manga_id],(txs,result)=>{
                     reslove(result.rows.raw());
                 },(error)=>{reject(error)})
             })
