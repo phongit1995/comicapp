@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, ScrollView ,TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, ScrollView ,TouchableOpacity ,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Feather from 'react-native-vector-icons/Feather';
@@ -26,8 +26,9 @@ const HomeHeader = () => {
     return (
         <View style={styles.header}>
             <View style={{ alignContent: "center", flexDirection: 'row', alignItems: 'center' }}>
-                <Feather name="menu" size={30}></Feather>
-                <Text style={{ textTransform: "uppercase", marginLeft: 20, fontSize: 16, fontWeight: "bold" }}>Manga Vip</Text>
+                {/* <Feather name="menu" size={30}></Feather> */}
+                <Image source={require("./../../assets/image/logo.png")} style={{width:25,height:25}}/>
+                <Text style={{ textTransform: "uppercase", marginLeft: 20, fontSize: 16, fontWeight: "bold",textAlign:"center" }}>Manga Vip</Text>
             </View>
             <View style={{ marginRight: 10 }} >
                 <TouchableOpacity onPress={onClickSearch}>
