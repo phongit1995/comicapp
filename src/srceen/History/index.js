@@ -20,7 +20,6 @@ const History = ()=>{
         },[])
     )
     const _OnLoadMore=()=>{
-        console.log("load more");
         SqlHelper.GetListHistory(page+1,12)
         .then(result=>{
             console.log(result);

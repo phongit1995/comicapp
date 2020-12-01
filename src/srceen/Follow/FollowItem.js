@@ -3,7 +3,7 @@ import {Text,View,TouchableOpacity,StyleSheet,Dimensions,Image} from 'react-nati
 const { width } = Dimensions.get('window');
 import { useNavigation } from '@react-navigation/native';
 import * as SCREEN from './../../constants/screen';
-const HistoryItem=({data})=>{
+const FollowItem=({data})=>{
     const navigation = useNavigation();
     const _OnClick =()=>{
         navigation.navigate(SCREEN.DETIAL_COMIC_SCREEN,{id:data.manga_id})
@@ -19,7 +19,7 @@ const HistoryItem=({data})=>{
         </TouchableOpacity>
     )
 }
-export default React.memo( HistoryItem );
+export default React.memo( FollowItem );
 const styles = StyleSheet.create({
     contaiItem: {
         width: (width /3) - 5,
