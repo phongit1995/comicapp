@@ -12,12 +12,14 @@ const { height, width } = Dimensions.get("window");
 const initialLayout = { width: Dimensions.get('window').width };
 import {fcmService} from './../../firebase/FCMService';
 import Detail from './Detail';
-
+import { useNavigation } from '@react-navigation/native';
+import * as SCREEN from  './../../constants/screen';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 const HEADER_MIN_HEIGHT = 50;
 const Space = 35;
 const HEADER_HEIGHT = 0;
 const DetialComic = (props) => {
+    const navigation = useNavigation();
     const router = useRoute();
     const { id } = router.params;
     const [isFollow,setIsFollow]=useState(false);
@@ -61,6 +63,7 @@ const DetialComic = (props) => {
     useEffect(() => {
         getDetialComic(id).then(result=>{
             if (result?.data?.status == "success") {
+            console.log(result?.data?.data);
             setData(result?.data?.data);
             SqlHelper.addHistoryManga(result.data.data._id,result.data.data.name,result.data.data.image);
             SqlHelper.getFollowManga(result.data.data._id).then(resultFollow=>{
@@ -86,6 +89,9 @@ const DetialComic = (props) => {
         removeDevicesManga(data._id,token).then(result=>{
             setIsFollow(data=>!data);
         })
+    }
+    const _OnReadComic = ()=>{
+        navigation.navigate(SCREEN.DETIAL_CHAPTER,{id:data.first_chapter})
     }
     const Detail_ = React.useCallback(() => {
         return <Detail data={dataMemo.description}></Detail>
@@ -150,14 +156,6 @@ const DetialComic = (props) => {
                                 <Text numberOfLines={1} style={styles.nameAuthor}>Tác Giả : <Text style={styles.normal}> {dataMemo.author}</Text></Text>
                                 <Text numberOfLines={1} style={styles.status}>Trạng Thái : <Text style={styles.normal}>Hoàn Thành</Text></Text>
                                 <Text numberOfLines={1} style={styles.category}>Thể Loại : {showCategory()}</Text>
-                                <TouchableScale
-                                    activeScale={0.9}
-                                    onPress={() => true}
-                                    useNativeDriver
-
-                                    style={styles.appButtonContainer}>
-                                    <Text style={styles.appButtonText}>Đọc Truyện</Text>
-                                </TouchableScale>
                             </View>
                         </View>
                     </View>
@@ -212,14 +210,17 @@ const DetialComic = (props) => {
                                 <Text style={{ fontSize: 12, color: '#b7b7a4' }}>Theo dõi</Text>
                             </TouchableScale>
                         }
+                        {
+                            data.first_chapter?
+                            <TouchableScale
+                                activeScale={0.9}
+                                onPress={_OnReadComic}
+                                useNativeDriver
+                                style={styles.appButtonContainer_}>
+                                <Text style={styles.appButtonText_}>Đọc Truyện</Text>
+                            </TouchableScale>:null
+                        }
                         
-                        <TouchableScale
-                            activeScale={0.9}
-                            onPress={() => true}
-                            useNativeDriver
-                            style={styles.appButtonContainer_}>
-                            <Text style={styles.appButtonText_}>Đọc Truyện</Text>
-                        </TouchableScale>
                     </View>
                 </Animated.View>
             </View>
