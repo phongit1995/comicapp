@@ -14,7 +14,7 @@ const History = ()=>{
             SqlHelper.GetListHistory(1,12)
             .then(result=>{
                 setListComic([...result]);
-                flatListRef.current.scrollToOffset({ animated: true, x: 0,y:0 })
+                flatListRef.current?.scrollToOffset({ animated: true, x: 0,y:0 })
                 setPage(1);
             })
         },[])
