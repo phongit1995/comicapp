@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.manga"
+        applicationId "com.phong.mangavip"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

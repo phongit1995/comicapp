@@ -12,7 +12,7 @@ const Header = () => {
                 <AntDesign name="arrowleft" size={25} color="#fff" />
             </TouchableOpacity>
             <TouchableOpacity>
-                <MaterialCommunityIcons name="dots-vertical" size={25} color="#fff" />
+                {/* <MaterialCommunityIcons name="dots-vertical" size={25} color="#fff" /> */}
             </TouchableOpacity>
 
         </View>

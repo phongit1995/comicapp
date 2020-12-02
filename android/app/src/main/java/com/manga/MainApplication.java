@@ -1,4 +1,4 @@
-package com.manga;
+package com.phong.mangavip;
 
 import android.app.Application;
 import android.content.Context;

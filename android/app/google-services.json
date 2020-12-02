@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "888825851972",
-    "firebase_url": "https://notifi-comic-app.firebaseio.com",
-    "project_id": "notifi-comic-app",
-    "storage_bucket": "notifi-comic-app.appspot.com"
+    "project_number": "55327080672",
+    "firebase_url": "https://manga-app-735ba.firebaseio.com",
+    "project_id": "manga-app-735ba",
+    "storage_bucket": "manga-app-735ba.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:888825851972:android:80b97a574226fe5196cc11",
+        "mobilesdk_app_id": "1:55327080672:android:8cd5475170e3fd8b3c5085",
         "android_client_info": {
-          "package_name": "com.manga"
+          "package_name": "com.phong.mangavip"
         }
       },
       "oauth_client": [
         {
-          "client_id": "888825851972-589njl4mq632lhebc7v9nfuhipl3q32o.apps.googleusercontent.com",
+          "client_id": "55327080672-bbt8gbt66tffp8potn0lkk19kf53mf7n.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBUY-YKCU_BzwbOfKFU01TMqAfXnaV24-A"
+          "current_key": "AIzaSyDHK7pcF7NpUtGIoB9kQ767owLguDoHoF0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "888825851972-589njl4mq632lhebc7v9nfuhipl3q32o.apps.googleusercontent.com",
+              "client_id": "55327080672-bbt8gbt66tffp8potn0lkk19kf53mf7n.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

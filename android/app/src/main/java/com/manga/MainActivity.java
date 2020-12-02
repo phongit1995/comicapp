@@ -1,4 +1,4 @@
-package com.manga;
+package com.phong.mangavip;
 
 import com.facebook.react.ReactActivity;
 

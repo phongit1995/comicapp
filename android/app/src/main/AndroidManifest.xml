@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.manga">
+  package="com.phong.mangavip">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
