@@ -14,7 +14,7 @@ export default function DetialComic({ route }) {
         (async () => {
             const resultData = await getDetailChapter(id)
             if (resultData?.data?.status == "success") {
-                // setName(resultData.data?.data.name)
+                setName("Chương : " + resultData.data.data.index)
                 setImagesList(resultData.data?.data?.images)
             }
             setIsLoading(false)
@@ -50,7 +50,7 @@ export default function DetialComic({ route }) {
                         renderItem={({ item }) =>
                             (
                                 <View style={styles.Img}>
-                                    <Image style={{ width: '100%', height: (width * 3) / 2 }}
+                                    <Image style={{ width: '100%', height: (width * 3) / 2.5 }}
                                         source={{ uri: item ,
                                             headers:{
                                                 Referer:"https://www.nettruyen.com/"
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     Img: {
-        width: "95%",
+        width: "100%",
         alignSelf: "center",
         flexDirection: "row",
         flex: 1,
