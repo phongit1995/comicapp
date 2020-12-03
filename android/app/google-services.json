@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:55327080672:android:8cd5475170e3fd8b3c5085",
+        "mobilesdk_app_id": "1:55327080672:android:22cc1c7f100c3c253c5085",
         "android_client_info": {
-          "package_name": "com.phong.mangavip"
+          "package_name": "com.phongnguyendev.vipmanga"
         }
       },
       "oauth_client": [

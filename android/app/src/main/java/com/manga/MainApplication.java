@@ -1,4 +1,4 @@
-package com.phong.mangavip;
+package com.phongnguyendev.vipmanga;
 
 import android.app.Application;
 import android.content.Context;

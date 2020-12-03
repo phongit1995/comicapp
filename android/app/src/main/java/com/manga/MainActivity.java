@@ -1,4 +1,4 @@
-package com.phong.mangavip;
+package com.phongnguyendev.vipmanga;
 
 import com.facebook.react.ReactActivity;
 
