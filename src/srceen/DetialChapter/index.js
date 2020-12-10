@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, Dimensions, ActivityIndicator, } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
-const { height, width } = Dimensions.get("screen");
+const { height, width } = Dimensions.get("window");
 import { getDetailChapter } from './../../api/comic'
 export default function DetialComic({ route }) {
     const { id } = route.params
@@ -49,17 +49,14 @@ export default function DetialComic({ route }) {
                         keyExtractor={(item) => `${item}`}
                         renderItem={({ item }) =>
                             (
-                                <View style={styles.Img}>
-                                    <Image style={{ width: '100%', height: (width * 3) / 2.5 }}
-                                        source={{ uri: item ,
-                                            headers:{
-                                                Referer:"https://www.nettruyen.com/"
-                                            }
-                                        }}
-                                        resizeMode="stretch"
-                                    >
-                                    </Image>
-                                </View>
+                                <ImageFullWith url={item}/>
+                                    // <Image style={{ width: '100%', height: (width * 3) / 2.5 }}
+                                    //     source={{ uri: item ,
+                                    //         headers:{
+                                    //             Referer:"https://www.nettruyen.com/"
+                                    //         }
+                                    //     }}
+                                    //     />
                             )
                         }
                     />
@@ -68,6 +65,22 @@ export default function DetialComic({ route }) {
         );
     }
 }
+const ImageFullWith=React.memo(({url})=>{
+    const [heightImage,setHeightImage]=useState((width * 3) / 2.5);
+    useEffect(()=>{
+        Image.getSizeWithHeaders(url,{
+            Referer:"https://www.nettruyen.com/"
+        },(withdata,heightdata)=>{
+            setHeightImage(width*(heightdata/withdata))
+        })
+    },[])
+    return <Image style={{ width: "100%", height: heightImage,flex:1 }}
+        source={{ uri: url ,
+        headers:{
+            Referer:"https://www.nettruyen.com/"
+        }
+    }} />
+})
 const styles = StyleSheet.create({
     container: {
         flex: 1,

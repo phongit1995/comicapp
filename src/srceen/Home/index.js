@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, StyleSheet, ScrollView ,TouchableOpacity ,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import Feather from 'react-native-vector-icons/Feather';
+import { BannerAd, TestIds ,BannerAdSize } from '@react-native-firebase/admob';
 import ComicHot from './ComicHot/ComicHot';
 import ComicUpdate from './ComicUpdate/ComicUpdate';
 import * as SCREEN from './../../constants/screen';
@@ -10,6 +10,9 @@ const Home = () => {
     return (
         <View style={styles.container}>
             <HomeHeader />
+            <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.SMART_BANNER}
+             onAdFailedToLoad={(error)=>{console.log(error)}}
+             />
             <ScrollView style={{ paddingHorizontal: 10, flex: 1 }}>
                 <ComicHot />
                 <ComicUpdate />
