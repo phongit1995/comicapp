@@ -1,26 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Image, Dimensions, ActivityIndicator, } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, ActivityIndicator, } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 const { height, width } = Dimensions.get("window");
 import { getDetailChapter } from './../../api/comic'
+import {makeUserName} from './../../common/stringHelper';
 export default function DetialComic({ route }) {
     const { id } = route.params
     const navigation = useNavigation();
     const [name, setName] = useState("Chi Tiết");
-    const [imagesList, setImagesList] = useState()
+    const [imagesList, setImagesList] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        (async () => {
-            const resultData = await getDetailChapter(id)
+        getDetailChapter(id).then((resultData)=>{
             if (resultData?.data?.status == "success") {
                 setName("Chương : " + resultData.data.data.index)
-                setImagesList(resultData.data?.data?.images)
+                setImagesList(resultData.data?.data?.images);
+                setIsLoading(false)
             }
-            setIsLoading(false)
-        })()
+        })
     }, [])
-
+    const ViewImagesALl =()=>{
+        return imagesList.map((item)=>{
+            return <ImageFullWith key={makeUserName(4)} url={item}/>
+        })
+    }
     if (isLoading) {
         return (
             <View style={styles.containers}>
@@ -41,26 +45,9 @@ export default function DetialComic({ route }) {
                     <Text style={styles.name}>{name}</Text>
                     <View style={{ flexBasis: 20 }}></View>
                 </View>
-                <View style={styles.content}>
-                    <FlatList
-                        data={imagesList}
-                        showsVerticalScrollIndicator ={false}
-                        showsHorizontalScrollIndicator={false}
-                        keyExtractor={(item) => `${item}`}
-                        renderItem={({ item }) =>
-                            (
-                                <ImageFullWith url={item}/>
-                                    // <Image style={{ width: '100%', height: (width * 3) / 2.5 }}
-                                    //     source={{ uri: item ,
-                                    //         headers:{
-                                    //             Referer:"https://www.nettruyen.com/"
-                                    //         }
-                                    //     }}
-                                    //     />
-                            )
-                        }
-                    />
-                </View>
+                <ScrollView style={styles.content} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+                    {ViewImagesALl()}
+                </ScrollView>
             </View>
         );
     }
@@ -72,14 +59,14 @@ const ImageFullWith=React.memo(({url})=>{
             Referer:"https://www.nettruyen.com/"
         },(withdata,heightdata)=>{
             setHeightImage(width*(heightdata/withdata))
-        })
+        },(error)=>console.log(error))
     },[])
     return <Image style={{ width: "100%", height: heightImage,flex:1 }}
         source={{ uri: url ,
         headers:{
             Referer:"https://www.nettruyen.com/"
         }
-    }} />
+     }} resizeMode="stretch" />
 })
 const styles = StyleSheet.create({
     container: {
