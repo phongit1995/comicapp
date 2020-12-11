@@ -6,11 +6,12 @@ import { BannerAd, TestIds ,BannerAdSize } from '@react-native-firebase/admob';
 import ComicHot from './ComicHot/ComicHot';
 import ComicUpdate from './ComicUpdate/ComicUpdate';
 import * as SCREEN from './../../constants/screen';
+const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-2866880782165460/5830231394';
 const Home = () => {
     return (
         <View style={styles.container}>
             <HomeHeader />
-            <BannerAd unitId={TestIds.BANNER} size={BannerAdSize.SMART_BANNER}
+            <BannerAd unitId={adUnitId} size={BannerAdSize.FULL_BANNER}
              onAdFailedToLoad={(error)=>{console.log(error)}}
              />
             <ScrollView style={{ paddingHorizontal: 10, flex: 1 }}>

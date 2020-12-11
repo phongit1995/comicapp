@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, ActivityIndicator, } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, ActivityIndicator } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 const { height, width } = Dimensions.get("window");
 import { getDetailChapter } from './../../api/comic'
 import {makeUserName} from './../../common/stringHelper';
+import AdmodService from "./../../firebase/Admod";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export default function DetialComic({ route }) {
     const { id } = route.params
     const navigation = useNavigation();
@@ -19,6 +22,8 @@ export default function DetialComic({ route }) {
                 setIsLoading(false)
             }
         })
+        ShowAdsChapter();
+        //AdmodService.showFull();
     }, [])
     const ViewImagesALl =()=>{
         return imagesList.map((item)=>{
@@ -59,7 +64,7 @@ const ImageFullWith=React.memo(({url})=>{
             Referer:"https://www.nettruyen.com/"
         },(withdata,heightdata)=>{
             setHeightImage(width*(heightdata/withdata))
-        },(error)=>console.log(error))
+        },(error)=>{})
     },[])
     return <Image style={{ width: "100%", height: heightImage,flex:1 }}
         source={{ uri: url ,
@@ -68,6 +73,21 @@ const ImageFullWith=React.memo(({url})=>{
         }
      }} resizeMode="stretch" />
 })
+const  ShowAdsChapter=async()=>{
+    const KEY_VIEWS="VIEWS_CHAPTER";
+    let numberShow = await AsyncStorage.getItem(KEY_VIEWS);
+    if(!numberShow){
+        await AsyncStorage.setItem(KEY_VIEWS,"1");
+        AdmodService.showFull();
+        return ;
+    }
+    numberShow=parseInt(numberShow);
+    if(numberShow==3){
+        AdmodService.showFull();
+        numberShow=0;
+    }
+    await AsyncStorage.setItem(KEY_VIEWS,`${numberShow+1}`);
+}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
