@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, ActivityIndicator ,Animated  } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 const { height, width } = Dimensions.get("window");
@@ -14,6 +14,12 @@ export default function DetialComic({ route }) {
     const [name, setName] = useState("Chi Tiết");
     const [imagesList, setImagesList] = useState([])
     const [isLoading, setIsLoading] = useState(true);
+    const scrollY = new Animated.Value(0)
+    const diffClamp = Animated.diffClamp(scrollY,0,height/12)
+    const translateY = diffClamp.interpolate({
+        inputRange:[0,height/12],
+        outputRange:[0,-(height/12)]
+    })
     useEffect(() => {
         getDetailChapter(id).then((resultData)=>{
             if (resultData?.data?.status == "success") {
@@ -23,7 +29,6 @@ export default function DetialComic({ route }) {
             }
         })
         ShowAdsChapter();
-        //AdmodService.showFull();
     }, [])
     const ViewImagesALl =()=>{
         return imagesList.map((item)=>{
@@ -43,14 +48,22 @@ export default function DetialComic({ route }) {
     } else {
         return (
             <View style={styles.container}>
-                <View style={styles.Header}>
+                <Animated.View style={[styles.Header,{
+                    transform:[
+                        {translateY:translateY}
+                    ]
+                }]}>
                     <TouchableOpacity onPress={() => navigation.goBack()} >
                         <Entypo name="chevron-thin-left" color="#fff" size={20} style={{ paddingLeft: 5 }} />
                     </TouchableOpacity>
                     <Text style={styles.name}>{name}</Text>
                     <View style={{ flexBasis: 20 }}></View>
-                </View>
-                <ScrollView style={styles.content} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}>
+                </Animated.View>
+                <ScrollView style={styles.content} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
+                onScroll={(e)=>{
+                    scrollY.setValue(e.nativeEvent.contentOffset.y) 
+                }}
+                >
                     {ViewImagesALl()}
                 </ScrollView>
             </View>
@@ -105,6 +118,11 @@ const styles = StyleSheet.create({
         height: 80
     },
     Header: {
+        position:"absolute",
+        top:0,
+        left:0,
+        elevation:1,
+        width:width,
         flexDirection: "row",
         paddingVertical: 10,
         justifyContent: "center",
@@ -113,18 +131,19 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#d90429',
         backgroundColor: '#e63946',
+       
     },
     name: {
         textTransform: 'uppercase',
         fontSize: 15,
         flex: 1,
-        // paddingLeft: 50,
         textAlign: "center",
         fontWeight: 'bold',
         color: '#fff',
     },
     content: {
         flex: 1,
+        paddingTop:height/12
     },
     Img: {
         width: "100%",
