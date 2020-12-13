@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { StatusBar, Alert, BackHandler, Linking } from 'react-native';
 import IconEvilIcons from 'react-native-vector-icons/EvilIcons';
 import IconFather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -21,6 +22,7 @@ import DetialChapter from './DetialChapter'
 import Setting from './Setting';
 import analytics from '@react-native-firebase/analytics';
 import * as RootNavigation from './RefNavigation';
+
 const TabBottom = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -41,7 +43,7 @@ const Screen = () => {
                 routeNameRef.current = currentRouteName;
             }}
         >
-            <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Navigator screenOptions={{ headerShown: false }} >
                 <Stack.Screen name={SCREEN.MAIN_SCREEN} component={BottomTab} />
                 <Stack.Screen name={SCREEN.LOGIN_SCREEN} component={Login} options={{ ...TransitionPresets.SlideFromRightIOS }} />
                 <Stack.Screen name={SCREEN.DETIAL_COMIC_SCREEN} component={DetialComic} options={{ ...TransitionPresets.SlideFromRightIOS }} />

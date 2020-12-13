@@ -1194,28 +1194,28 @@
   dependencies:
     invariant "^2.2.4"
 
-"@react-native-firebase/admob@^10.1.1":
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/admob/-/admob-10.1.1.tgz#9dcdb96017d6c3ccd1d40966b57c82fc8afa84a1"
-  integrity sha512-yjCBsFNsFDAGGQaX65CEFH0tkA6/bz4rf3oCYa/7ibW+CoLFgRyfFV+0V2ynrNU3nDPChXwNbM+LEICliAK3xg==
+"@react-native-firebase/admob@^10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/admob/-/admob-10.2.0.tgz#75b2c7a695578b05c0188145e94484732c9ae6f3"
+  integrity sha512-gfH5bReqNlkjnWEwezfERyd3SZI5iGHNZXo7ZrD2nBLqVRh+JbnLeSYZJX9GcheQcpEgYMiBxwL/Q1emPcj+Mw==
 
-"@react-native-firebase/analytics@^10.1.0":
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-10.1.0.tgz#8b503f08051ff3cf730ad83d418a307ffd32f11c"
-  integrity sha512-upTGcw5wl47lIeyhjsKFlXuJz2Fg7BbuAcgwq+FJ9sqkTJxDPRW/aHACsd9+WAs/UiwcGEpcT8gzgkvoJp68dg==
+"@react-native-firebase/analytics@^10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-10.2.0.tgz#472a0ab14bbedeab9cd6629c3bb199094435c4cf"
+  integrity sha512-75JeFK0mnXMjY6MMRCyDCMz269Tv2GYBGunAWy5KFeNMpftEP9SGhDV/0dEsaF+1OwLE7TLAg7y5Xvdve1ziZQ==
 
-"@react-native-firebase/app@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-10.0.0.tgz#dc18af26accb31028eab00dd36f486fee046e63e"
-  integrity sha512-hvmEOj3vMeaoYX8Q7f2UZCSVGv0VMvTR/RUUka0y7Xmyzg3kpdb2EHCOoqLIN9ySPf5b/At5I6GVazQugbZqLA==
+"@react-native-firebase/app@^10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-10.2.0.tgz#9c2b1fd2337cd1673f357517dddbab674ca79472"
+  integrity sha512-vyGhE8DJ3NqtiiphiAuzwfVxecVOL1cbIKRQ2gI1sauTf5LigcorxmGxiBQKbuyV1K8pzJwUchb4qktUdbrmjQ==
   dependencies:
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
-"@react-native-firebase/messaging@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-10.0.0.tgz#fe0bd993e80dbccffd7c5c21ee04754f2196ad81"
-  integrity sha512-XSoHSVvxR5MRzkJ/RQWzO3LQ29N13fWckttd5oxur2OtEMHZM7CseWqlN3fcWcoGNZXh17HXu9XlxsznE/kzxA==
+"@react-native-firebase/messaging@^10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-10.2.0.tgz#a02b69e9ec616b05ea85ab6c31cc209c6f4bac59"
+  integrity sha512-HHf35avpA38SWNdPe1Dp/W0d0KCeRgbw5M3AEsoTs3B9oE/NLAQVdz5sSJzdgyVXnCKGInGsHkLn6Q3WSAvemw==
 
 "@react-navigation/bottom-tabs@^5.11.1":
   version "5.11.1"
@@ -5955,6 +5955,11 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.1.tgz#5b3531bd76a645a4c9fb6e693ed36419e3301339"
   integrity sha512-NAnt2iGDXohE5LI7uBnLnqvLQMtzhkiAOLXTmv+qnF9Ky7xAPcX8Up/xWIhxvLVGJvuLiNc4xQLtuqDRzb4fSA==
 
+react-native-device-info@^7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-7.3.1.tgz#6c4b0120d57872a2f7534332323306b386828a3d"
+  integrity sha512-RQP3etbmXsOlcaxHeHNug68nRli02S9iGC7TbaXpkvyyevIuRogfnrI71sWtqmlT91kdpYAOYKmNfRL9LOSKVw==
+
 react-native-gesture-handler@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.8.0.tgz#18f61f51da50320f938957b0ee79bc58f47449dc"
@@ -6038,6 +6043,11 @@ react-native-share@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-4.1.0.tgz#78083d03c236849342decd0ecbc0bb9b77f1eb72"
   integrity sha512-ytkgi9UsjQviKgWKuniApomB3opjydxPKnrApBF+SPMnQFVVDlH5EyHR6rK+qxMtIAcspb7ylNPj3KzgO+YCrg==
+
+react-native-splash-screen@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.2.0.tgz#d47ec8557b1ba988ee3ea98d01463081b60fff45"
+  integrity sha512-Ls9qiNZzW/OLFoI25wfjjAcrf2DZ975hn2vr6U9gyuxi2nooVbzQeFoQS5vQcbCt9QX5NY8ASEEAtlLdIa6KVg==
 
 react-native-sqlite-storage@^5.0.0:
   version "5.0.0"
