@@ -7,7 +7,8 @@ import { getDetailChapter } from './../../api/comic'
 import {makeUserName} from './../../common/stringHelper';
 import AdmodService from "./../../firebase/Admod";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome';
+import * as SCREEN from './../../constants/screen';
 
 export default function DetialComic({ route }) {
     const { id } = route.params
@@ -33,7 +34,6 @@ export default function DetialComic({ route }) {
         getDetailChapter(id).then((resultData)=>{
             if (resultData?.data?.status == "success") {
                 setName("Chương : " + resultData.data.data.index);
-                console.log(resultData.data?.data);
                 setAfterChapter(resultData.data?.data?.after);
                 setBeforeChapter(resultData.data?.data?.before);
                 setImagesList(resultData.data?.data?.images);
@@ -66,7 +66,7 @@ export default function DetialComic({ route }) {
                         {translateY:translateY}
                     ]
                 }]}>
-                    <TouchableOpacity onPress={() => {navigation.goBack();console.log("Phong")}}>
+                    <TouchableOpacity onPress={() => {navigation.goBack()}}>
                         <Entypo name="chevron-thin-left" color="#fff" size={20} style={{ paddingLeft: 5 }} />
                     </TouchableOpacity>
                     <Text style={styles.name}>{name}</Text>
@@ -102,7 +102,7 @@ export default function DetialComic({ route }) {
                     <View style={{flex:1,flexDirection:"row",alignItems:"center",justifyContent:"space-between"}}>
                         <View >
                             {beforeChapter!=null?
-                                <TouchableOpacity onPress={()=>{console.log(beforeChapter)}} style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+                                <TouchableOpacity onPress={()=>{navigation.replace(SCREEN.DETIAL_CHAPTER,{id:beforeChapter})}} style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                                     <FontAwesome5 name={"angle-left"} size={35} color={"#ffffff"}/>
                                     <Text style={[{marginLeft:7},styles.textChapter]}>Chương Trước</Text>
                                 </TouchableOpacity>:null
@@ -110,7 +110,7 @@ export default function DetialComic({ route }) {
                         </View>
                         <View >
                             {afterChapter!=null?
-                                <TouchableOpacity style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
+                                <TouchableOpacity onPress={()=>{navigation.replace(SCREEN.DETIAL_CHAPTER,{id:afterChapter})}} style={{flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                                     <Text style={[{marginRight:7},styles.textChapter]}>Chương Sau</Text>
                                 <FontAwesome5 name={"angle-right"} size={35} color={"#ffffff"}/>
                                 </TouchableOpacity>:null
