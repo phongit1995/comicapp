@@ -34,6 +34,7 @@ export default function DetialComic({ route }) {
         getDetailChapter(id).then((resultData)=>{
             if (resultData?.data?.status == "success") {
                 setName("Chương : " + resultData.data.data.index);
+                console.log(resultData.data.data.images)
                 setAfterChapter(resultData.data?.data?.after);
                 setBeforeChapter(resultData.data?.data?.before);
                 setImagesList(resultData.data?.data?.images);
@@ -136,7 +137,8 @@ const ImageFullWith=React.memo(({url})=>{
         headers:{
             Referer:"https://www.nettruyen.com/"
         }
-     }} resizeMode="stretch" />
+     }} resizeMode="stretch" onError={({ nativeEvent: {error} })=>{console.log(error)}}
+     />
 })
 const  ShowAdsChapter=async()=>{
     const KEY_VIEWS="VIEWS_CHAPTER";
