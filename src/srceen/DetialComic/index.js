@@ -63,7 +63,6 @@ const DetialComic = (props) => {
     useEffect(() => {
         getDetialComic(id).then(result=>{
             if (result?.data?.status == "success") {
-            console.log(result?.data?.data);
             setData(result?.data?.data);
             SqlHelper.addHistoryManga(result.data.data._id,result.data.data.name,result.data.data.image);
             SqlHelper.getFollowManga(result.data.data._id).then(resultFollow=>{

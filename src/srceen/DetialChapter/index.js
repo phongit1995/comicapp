@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, ActivityIndicator ,Animated  } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions, ActivityIndicator ,Animated ,FlatList } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { useNavigation } from '@react-navigation/native';
 const { height, width } = Dimensions.get("window");
@@ -59,13 +59,27 @@ export default function DetialComic({ route }) {
                     <Text style={styles.name}>{name}</Text>
                     <View style={{ flexBasis: 20 }}></View>
                 </Animated.View>
-                <ScrollView style={styles.content} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
+                {/* <ScrollView style={styles.content} showsHorizontalScrollIndicator={false} showsVerticalScrollIndicator={false}
                 onScroll={(e)=>{
                     scrollY.setValue(e.nativeEvent.contentOffset.y) 
                 }}
                 >
                     {ViewImagesALl()}
-                </ScrollView>
+                </ScrollView> */}
+                <View style={styles.content}>
+                    <FlatList
+                    style={{ paddingTop:height/12}}
+                    showsHorizontalScrollIndicator={false} 
+                    initialNumToRender={10}
+                    showsVerticalScrollIndicator={false}
+                    data={imagesList}
+                    keyExtractor={(item,index) =>item+index}
+                    renderItem={({item})=><ImageFullWith url={item}/>}
+                    onScroll={(e)=>{
+                        scrollY.setValue(e.nativeEvent.contentOffset.y) 
+                    }}
+                    />
+                </View>
             </View>
         );
     }
@@ -142,8 +156,7 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     content: {
-        flex: 1,
-        paddingTop:height/12
+        flex: 1
     },
     Img: {
         width: "100%",
