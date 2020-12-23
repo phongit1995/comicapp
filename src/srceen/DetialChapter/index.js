@@ -34,7 +34,6 @@ export default function DetialComic({ route }) {
         getDetailChapter(id).then((resultData)=>{
             if (resultData?.data?.status == "success") {
                 setName("Chương : " + resultData.data.data.index);
-                console.log(resultData.data.data.images)
                 setAfterChapter(resultData.data?.data?.after);
                 setBeforeChapter(resultData.data?.data?.before);
                 setImagesList(resultData.data?.data?.images);
