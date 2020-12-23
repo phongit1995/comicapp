@@ -1,11 +1,15 @@
 import React ,{useState ,useEffect} from 'react';
-import {Text,View,StyleSheet ,TouchableOpacity,Linking ,Switch } from 'react-native';
+import {Text,View,StyleSheet ,TouchableOpacity,Linking ,Switch ,Image } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Share from 'react-native-share';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import * as SCREEN from './../../constants/screen';
+
 const Setting =()=>{
     const [notification,Setnotification] = useState(true);
+    const navigation = useNavigation();
     useEffect(()=>{
         AsyncStorage.getItem("NOTIFICATION_KEY")
         .then(data=>{
@@ -33,6 +37,10 @@ const Setting =()=>{
         <View style={styles.container}>
             <HeaderSetting />
             <View style={styles.containerContent}>
+                <TouchableOpacity  style={styles.userView} onPress={()=>navigation.navigate(SCREEN.LOGIN_SCREEN)} >
+                    <Image source={require('./../../assets/image/default.png')} style={styles.userAvatar} />
+                    <Text style={{fontSize:17,fontWeight:"bold",fontFamily: "Nunito-SemiBold",}}>Nhấn Để Đăng Nhập</Text>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={_goToEmail}>
                     <View style={{flexDirection:"row",alignItems:"center"}}>
                         <AntDesign name="mail" size={18}/>
@@ -125,8 +133,31 @@ const styles = StyleSheet.create({
         textAlign:"center"
     },
     containerContent:{
-        marginTop:20,
+        marginTop:10,
         paddingHorizontal:15,
         fontFamily: "Nunito-SemiBold"
+    },
+    userView:{
+        flexDirection:"row",
+        alignItems:"center",
+        paddingHorizontal:10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 1,
+            height: 1,
+        },
+        shadowOpacity: 0.22,
+        shadowRadius: 0.9,
+        elevation: 2,
+        marginBottom:10,
+        borderRadius:20,
+        // borderWidth:1,
+        padding:12
+    },
+    userAvatar:{
+        width:60,
+        height:60,
+        borderRadius:50,
+        marginRight:20
     }
 })
