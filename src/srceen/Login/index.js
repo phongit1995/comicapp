@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, StyleSheet, Image, Dimensions, Text, Button } from 'react-native'
+import { SafeAreaView, View, StyleSheet, Image, Dimensions, Text, Button ,StatusBar} from 'react-native'
 import TextInputs from '../../Components/Form/TextInputs';
 import CheckBox from '../../Components/Form/CheckBox';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,18 +9,28 @@ const { width, height: Hheight } = Dimensions.get("window")
 const height = width * (750 / 1125);
 import { Formik } from 'formik';
 import Icon from '../../Components/Form/Icon';
-
+import Spinner from 'react-native-loading-spinner-overlay';
+import {loginUser} from './../../api/user';
 export default React.memo(function Login() {
-    const [isView, setView] = React.useState(true)
+    const [isView, setView] = React.useState(true);
+    const [loading,setLoading] = React.useState(false);
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .email("Nhập địa chỉ Email hợp lệ '@gmail.com'")
             .required("Vui lòng điền đầy đủ thông tin"),
         password: Yup.string().required("Vui lòng điền đầy đủ thông tin")
-            .min(6, "Mật khẩu phải có ít nhất 6 kí tự"),
+            .min(5, "Mật khẩu phải có ít nhất 5 kí tự"),
     });
+    const handelLoginUser=(values)=>{
+        console.log( values.email)
+        loginUser(values.email,values.password).then(result=>{
+            console.log(result)
+        }).catch(error=>console.log(error.response.data))
+    }
     return (
-        <View style={styles.container}>
+        <View style={styles.container} >
+            <StatusBar  translucent backgroundColor="transparent" />
+            <Spinner visible={loading} />
             <View style={{ flex: 1 / 3 }}>
                 <Image
                     style={styles.image_Top}
@@ -39,11 +49,9 @@ export default React.memo(function Login() {
                 <View style={styles.formLogin}>
                     <Text style={styles.title}>Đăng Nhập</Text>
                     <Formik
-                        initialValues={{ email: '', password: '' }}
+                        initialValues={{ email: 'phong@gmail.com', password: 'phong' }}
                         validationSchema={validationSchema}
-                        onSubmit={(values) => {
-                            console.log(values)
-                        }}
+                        onSubmit={handelLoginUser}
                     >
                         {({
                             values,
